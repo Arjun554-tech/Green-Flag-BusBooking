@@ -17,60 +17,79 @@ import { locations } from "./utils";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [searchState, setSearchState] = useState({
-    from: locations[0],
-    to: locations[5],
-    date: "",
-  });
+  const [searchState, setSearchState] =
+    useState({
+      from: locations[0],
+      to: locations[5],
+      date: "",
+    });
 
-  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedSeats, setSelectedSeats] =
+    useState([]);
 
   return (
     <BrowserRouter>
-      <div>
 
-        <Header />
+      <Header />
 
-        <Routes>
+      <Routes>
 
-          {/* Bus Search Page */}
-          <Route
-            path="/"
-            element={
-              <BusSearch
-                searchState={searchState}
-                setSearchState={setSearchState}
-              />
-            }
-          />
+        {/* HOME / SEARCH PAGE */}
 
-          {/* Bus Layout Page */}
-          <Route
-            path="/bus/:id"
-            element={
-              <BusLayout
-                selectedSeats={selectedSeats}
-                setSelectedSeats={setSelectedSeats}
-              />
-            }
-          />
+        <Route
+          path="/"
+          element={
+            <BusSearch
+              searchState={
+                searchState
+              }
+              setSearchState={
+                setSearchState
+              }
+            />
+          }
+        />
 
-          {/* Booking Form Page */}
-          <Route
-            path="/bus/book"
-            element={
-              <BookingForm
-                selectedSeats={selectedSeats}
-                searchState={searchState}
-                setSelectedSeats={setSelectedSeats}
-                setSearchState={setSearchState}
-              />
-            }
-          />
+        {/* BUS SEAT PAGE */}
 
-        </Routes>
+        <Route
+          path="/bus/:id"
+          element={
+            <BusLayout
+              selectedSeats={
+                selectedSeats
+              }
+              setSelectedSeats={
+                setSelectedSeats
+              }
+            />
+          }
+        />
 
-      </div>
+        {/* BOOKING FORM */}
+
+        <Route
+          path="/bus/book"
+          element={
+            <BookingForm
+              selectedSeats={
+                selectedSeats
+              }
+              searchState={
+                searchState
+              }
+              setSelectedSeats={
+                setSelectedSeats
+              }
+              setSearchState={
+                setSearchState
+              }
+            />
+          }
+        />
+
+      </Routes>
+
     </BrowserRouter>
   );
 }
